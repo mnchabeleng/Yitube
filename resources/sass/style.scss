@@ -1,0 +1,71 @@
+@import "./vendors";
+
+.jumbotron {
+    clip-path: polygon(0 23%, 0 0, 100% 0, 100% 75%, 16% 100%);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+main {
+    min-height: 88vh;
+}
+
+.warning {
+    border: 2px solid red;
+
+    .blink {
+        animation: blinker 1.5s linear infinite;
+    }
+      
+    @keyframes blinker {
+        50% {
+          opacity: .2;
+        }
+    }
+}
+
+#video-player {
+    position: relative;
+
+    video {
+        width: 100%;
+    }
+
+    .overlay {
+        position: absolute;
+        background-color: $gray-700;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+    }
+
+    .loader-icon {
+        position: absolute;
+        border: 3px solid #ffffff;
+        border-radius: 50%;
+        border-top: 5px solid transparent;
+        width: 55px;
+        height: 55px;
+        -webkit-animation: spin 0.5s linear infinite; /* Safari */
+        animation: spin 0.5s linear infinite;
+        top: 45%;
+        left: 45%;
+    }
+    
+    @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+    }
+      
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+}
+
+footer {
+    clip-path: polygon(2% 47%, 4% 0, 100% 52%, 100% 100%, 0 100%);
+}

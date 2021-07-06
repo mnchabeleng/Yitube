@@ -1,0 +1,32 @@
+<%- include('../includes/header') -%>
+<section class="pt-5 pb-5">
+    <div class="container">
+        <h1><%= title %></h1>
+        <%- include('../includes/profile_navbar') -%>
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Image</div>
+                    <div class="card-body">
+                        <img src="https://via.placeholder.com/155" class="img-thumbnail rounded-circle mx-auto d-block" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="exampleInputFile">Image</label>
+                        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                        <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Update Image</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-6 col-md-3"></div>
+        </div>
+    </div>
+</section>
+<%- include('../includes/footer') -%>

@@ -1,0 +1,36 @@
+<%- include('includes/header') -%>
+<section class="pt-5 pb-5">
+    <div class="container">
+        <h1><%= title %></h1>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <form method="POST">
+                <%- include('includes/messages') -%>
+
+                <div class="form-group<%= typeof email_error != 'undefined' ? ' has-danger' : null %>">
+                  <label class="form-control-label" for="email">Email</label>
+                  <input type="text" class="form-control<%= typeof email_error != 'undefined' ? ' is-invalid' : null %>" name="email" id="email" value="<%= typeof email != 'undefined' ? email : null %>">
+                  <div class="invalid-feedback"><%= typeof email_error != 'undefined' ? email_error : null %></div>
+                </div>
+                
+                <div class="form-group<%= typeof password_error != 'undefined' ? ' has-danger' : null %>">
+                  <label class="form-control-label" for="password">Password</label>
+                  <input type="text" class="form-control<%= typeof password_error != 'undefined' ? ' is-invalid' : null %>" name="password" id="password" value="<%= typeof password != 'undefined' ? password : null %>">
+                  <div class="invalid-feedback"><%= typeof password_error != 'undefined' ? password_error : null %></div>
+                </div>
+      
+                <div class="form-group<%= typeof confirm_password_error != 'undefined' ? ' has-danger' : null %>">
+                  <label class="form-control-label" for="confirm_password">Confirm password</label>
+                  <input type="text" class="form-control<%= typeof confirm_password_error != 'undefined' ? ' is-invalid' : null %>" name="confirm_password" id="confirm_password" value="<%= typeof confirm_password != 'undefined' ? confirm_password : null %>">
+                  <div class="invalid-feedback"><%= typeof confirm_password_error != 'undefined' ? confirm_password_error : null %></div>
+                </div>
+      
+                <div class="form-group">
+                  <button class="btn btn-primary" type="submit">Signup</button>
+                </div>
+              </form>  
+            </div>
+          </div>
+      </div>
+</section>
+<%- include('includes/footer') -%>

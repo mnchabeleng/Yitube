@@ -1,0 +1,57 @@
+<%- include('../includes/header') -%>
+<section class="pt-5 pb-5">
+    <div class="container">
+        <h1><%= title %></h1>
+        <%- include('../includes/profile_navbar') -%>
+        <div class="row">
+            <div class="col-sm-6 col-md-4 mb-3">
+                <div class="card text-white bg-secondary h-100">
+                    <div class="card-header">Email</div>
+                    <div class="card-body">
+                      <h4 class="card-title">Email</h4>
+                      <p class="card-text">john.snow@mail.com</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/profile/email">Update Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 mb-3">
+                <div class="card text-white bg-secondary h-100">
+                    <div class="card-header">Image</div>
+                    <div class="card-body">
+                        <img src="https://via.placeholder.com/55" class="img-thumbnail rounded-circle mx-auto d-block" alt="">
+                    </div>
+                    <div class="card-footer">
+                        <a href="/profile/image">Update Image</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 mb-3">
+                <div class="card text-white bg-secondary h-100">
+                    <div class="card-header">Password</div>
+                    <div class="card-body">
+                      <h4 class="card-title">Password</h4>
+                      <p class="card-text">********</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/profile/password">Update Password</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 mb-3">
+                <div class="card text-white bg-secondary h-100">
+                    <div class="card-header">Preferences</div>
+                    <div class="card-body">
+                      <h4 class="card-title">Preferences</h4>
+                      <p class="card-text">?</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/profile/password">Update Preferences</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include('../includes/footer') -%>

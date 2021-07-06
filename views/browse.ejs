@@ -1,0 +1,18 @@
+<%- include('includes/header') -%>
+<section class="pt-5">
+  <div class="container">
+    <%- include('includes/warning') -%>
+  </div>
+</section>
+<section>
+    <div class="container">
+      <%- include('includes/search', { 'page': page }) -%>
+    </div>
+</section>
+<section class="pt-5 pb-5">
+  <div class="container">
+    <%- include('includes/list_movies') -%>
+    <%- include('includes/pagination') -%>
+  </div>
+</section>
+<%- include('includes/footer') -%>

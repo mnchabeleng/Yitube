@@ -1,0 +1,27 @@
+<% if(paginate.hasPreviousPages || paginate.hasNextPages(pageCount)){ %>
+<div class="row">
+    <div class="col-md-12">
+        <ul class="pagination justify-content-center">
+            <% if(paginate.hasPreviousPages){ %>
+            <li class="page-item">
+                <a class="page-link" href="?page=1<%= (typeof search != 'undefined' && search != null) ? `&search=${ search }` : '' %><%= (typeof order != 'undefined' && order != null) ? `&order=${ order }` : '' %>">First</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="<%= paginate.href(true) %>">&larr; Prev</a>
+            </li>
+            <% } %>
+            <% pages.forEach((pg, index) => { %>
+              <li class="page-item <%= page == pg.number && 'active' %>"><a class="page-link" href="<%= pg.url %>"><%= pg.number %></a></li>
+            <% }) %>
+            <% if(paginate.hasNextPages(pageCount)){ %>
+            <li class="page-item">
+                <a class="page-link" href="<%= paginate.href() %>">Next &rarr;</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page=<%= pageCount %><%= (typeof search != 'undefined' && search != null) ? `&search=${ search }` : '' %><%= (typeof order != 'undefined' && order != null) ? `&order=${ order }` : '' %>">Last</a>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+</div>
+<% } %>

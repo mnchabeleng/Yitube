@@ -1,0 +1,25 @@
+<form method="GET" id="search-form">
+    <div class="row">
+        <div class="col-sm-10">
+          <div class="form-group">
+              <input type="text" class="form-control" name="search" id="search" placeholder="Search" value="<%= typeof search != 'undefined' ? search : null %>" autocomplete="off">
+              <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group">
+            <select name="order" class="custom-select">
+              <option value="">~ Order ~</option>
+              <option value="title"<%= order === 'title' ? ' selected' : null %>>Title</option>
+              <option value="year"<%= order === 'year' ? ' selected' : null %>>Year</option>
+              <option value="rating"<%= order === 'rating' ? ' selected' : null %>>Rating</option>
+              <option value="download_count"<%= order === 'download_count' ? ' selected' : null %>>View/Download</option>
+              <option value="date_added"<%= order === 'date_added' ? ' selected' : null %>>Date added</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
