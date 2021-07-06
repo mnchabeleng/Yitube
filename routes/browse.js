@@ -32,8 +32,6 @@ router.all('/', async (req, res, next) => {
   pageCount = Math.ceil(movies.data.movie_count / limit)
   const pages = paginate.getArrayPages(req)(3, pageCount, page)
 
-  console.log(pages)
-
   if(movies.data.movie_count > 0 && movies != null)
     movies = movies.data.movies
 
