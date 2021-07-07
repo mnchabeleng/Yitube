@@ -3,8 +3,6 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
-const flash = require('connect-flash')
-const session = require('express-session')
 
 const app = express()
 
@@ -22,26 +20,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', require('./routes/index'))
 app.use('/browse', require('./routes/browse'))
 app.use('/movies', require('./routes/movies'))
-app.use('/login', require('./routes/login'))
-app.use('/logout', require('./routes/logout'))
-app.use('/signup', require('./routes/signup'))
-app.use('/profile', require('./routes/profile'))
-
-app.use(session({
-  secret: 'Hello World!',
-  resave: false,
-  saveUninitialized: true
-}))
-
-// Flash messaging
-app.use(flash())
-app.use((req, res, next) => {
-    res.locals.success_msg = req.flash('success_message')
-    res.locals.error_msg = req.flash('error_message')
-    res.locals.warning_msg = req.flash('warning_message')
-    res.locals.error = req.flash('error')
-    next()
-})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

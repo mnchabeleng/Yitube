@@ -1,18 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const axios = require('axios')
-const db = require('../helpers/dbConnect')
 
 router.get('/', async (req, res, next) => {
-  /*
-  try {
-    await db.authenticate()
-    console.log('Connection has been established successfully.')
-  } catch (error) {
-    console.error('Unable to connect to the database:', error)
-  }
-  */
-
   let recentlyAddeedMovies = []
   let popularMovies = []
   let topRatedMovies = []

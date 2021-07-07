@@ -3,26 +3,6 @@ const router = express.Router()
 const axios = require('axios')
 const torrentStream = require('torrent-stream')
 const path = require('path')
-const db = require('../helpers/dbConnect')
-
-router.get('/', async (req, res, next) => {
-
-  let moviesCovers = []
-
-  const movies = await axios.get('https://yts.mx/api/v2/list_movies.json?limit=18')
-         .then(result => result.data)
-         .catch(err => null)
-
-  if(movies.data.movie_count > 0 && movies != null)
-    moviesCovers = movies.data.movies.map(movie => movie.medium_cover_image)
-
-  const data = {
-    'title': 'Movies',
-    'movieCovers': moviesCovers
-  }
-
-  res.render('movies/index', data)
-})
 
 router.get('/:id', async (req, res, next) => {
   const id = req.params.id

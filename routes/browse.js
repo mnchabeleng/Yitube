@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 const axios = require('axios')
 const paginate = require('express-paginate')
-const db = require('../helpers/dbConnect')
 
+// Express pagination middleware
 router.use(paginate.middleware(18, 50))
 
 router.all('/', async (req, res, next) => {
@@ -20,15 +20,18 @@ router.all('/', async (req, res, next) => {
   let movies = []
 
   if(search == null){
+    // Get movies without search keyword
     movies = await axios.get(`https://yts.mx/api/v2/list_movies.json?page=${ page }&limit=${ limit }&sort_by=${ order }`)
            .then(result => result.data)
            .catch(e => null)
   }else{
+    // Get movies with search keyword
     movies = await axios.get(`https://yts.mx/api/v2/list_movies.json?page=${ page }&limit=${ limit }&query_term=${ encodeURIComponent(search) }&sort_by=${ order }`)
            .then(result => result.data)
            .catch(e => null)
   }
 
+  // Create pagination pages
   pageCount = Math.ceil(movies.data.movie_count / limit)
   const pages = paginate.getArrayPages(req)(3, pageCount, page)
 
