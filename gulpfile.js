@@ -10,6 +10,7 @@ const imagemin = require('gulp-imagemin')
 const replace = require('gulp-replace')
 sass.compiler = require('node-sass')
 
+// Export SASS to CSS
 exports.sass = () => {
     return gulp.src('./resources/sass/**/*.scss')
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
@@ -17,6 +18,14 @@ exports.sass = () => {
     .pipe(gulp.dest('./public/css/'))
 }
 
+// Minify CSS files
+exports.minCSS = () => {
+    return gulp.src('./public/css/**/*.css')
+    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(gulp.dest('./public/css/'))
+}
+
+// Export JS
 exports.js = () => {
     return gulp.src([
         './node_modules/jquery/dist/jquery.min.js',
@@ -35,6 +44,14 @@ exports.js = () => {
     .pipe(gulp.dest('./public/js/'))
 }
 
+// Minify JS files
+exports.minJS = () => {
+    return gulp.src('./public/js/*.js')
+    .pipe(terser({}))
+    .pipe(gulp.dest('./public/js/'))
+}
+
+// Export images
 exports.img = () => {
     return gulp.src('./resources/img/**/*')
     .pipe(imagemin())
@@ -42,8 +59,14 @@ exports.img = () => {
 }
 
 // Cachebusting
-exports.cacheBust = () => {
+exports.bust = () => {
     return gulp.src('./views/**/*.ejs')
     .pipe(replace(/ver=\d+/g, 'ver=' + new Date().getTime()))
     .pipe(gulp.dest('./views/'))
 }
+
+// Default
+exports.default = gulp.series(this.sass, this.js, this.img, this.bust)
+
+// Run min tasks
+exports.min = gulp.series(this.minCSS, this.minJS)

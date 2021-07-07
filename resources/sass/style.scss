@@ -66,6 +66,12 @@ main {
     }
 }
 
+.search-filter-form {
+    .awesomplete {
+        width: 100%;
+    }
+}
+
 footer {
     clip-path: polygon(2% 47%, 4% 0, 100% 52%, 100% 100%, 0 100%);
 }

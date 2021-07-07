@@ -21,6 +21,9 @@ app.use('/', require('./routes/index'))
 app.use('/browse', require('./routes/browse'))
 app.use('/movies', require('./routes/movies'))
 
+// api routes
+app.use('/api/movies', require('./routes/api/movies'))
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404))

@@ -13,7 +13,7 @@
       <% }) %>
     </div>
 <% }else if(typeof movies != 'undefined'){ %>
-  <h2 class="h5">No results found.</h2>
+  <%- include('./no_results') -%>
 <% } %>
 <% if(typeof related_movies != 'undefined' && related_movies.length > 0){ %>
     <div class="row pt-3 pb-3">

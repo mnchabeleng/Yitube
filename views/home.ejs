@@ -1,4 +1,4 @@
-<%- include('includes/header') -%>
+<%- include('./includes/header') -%>
 <div class="jumbotron" style="background-image: url(/img/hero.jpg)">
   <div class="container">
     <h1 class="display-3">Yitube</h1>
@@ -7,13 +7,13 @@
 </div>
 <section>
   <div class="container">
-    <%- include('includes/warning') -%>
+    <%- include('./includes/warning') -%>
     <h3 class="h4">Recently Added</h3>
-    <%- include('includes/list_movies', {'movies': recently_added_movies}) -%>
+    <%- include('./includes/list_movies', {'movies': recently_added_movies}) -%>
     <h3 class="h4">Porpular</h3>
-    <%- include('includes/list_movies', {'movies': popular_movies}) -%>
+    <%- include('./includes/list_movies', {'movies': popular_movies}) -%>
     <h3 class="h4">Top Rated</h3>
-    <%- include('includes/list_movies', {'movies': top_rated_movies}) -%>
+    <%- include('./includes/list_movies', {'movies': top_rated_movies}) -%>
   </div>
 </section>
-<%- include('includes/footer') -%>
+<%- include('./includes/footer') -%>
