@@ -2,6 +2,8 @@
  * Handle common UI components
  */
 
+const API_URL = 'http://localhost:3000/api'
+
 window.addEventListener('load', (e) => {
     // Video player load
     const videoPlayerOverlay = document.querySelector('#video-player .overlay')
@@ -39,7 +41,7 @@ window.addEventListener('load', (e) => {
         })
 
         searchInput.addEventListener('input', () => {
-            fetch(`http://localhost:3000/api/movies?search=${ searchInput.value }`)
+            fetch(`${ API_URL }/movies?search=${ searchInput.value }`)
             .then(res => res.json())
             .then(data => {
                 if(data.length > 0){
@@ -47,6 +49,23 @@ window.addEventListener('load', (e) => {
                     awesomplete.list = movieTitles
                 }
             })
+        })
+    }
+
+    const owlCarousel = document.querySelector('.owl-carousel')
+    if( owlCarousel ){
+        owlCarousel.owlCarousel({
+            dots: false,
+            nav: true,
+            loop: true,
+            margin: 10,
+            lazyLoad: true,
+            responsiveClass: true,
+            responsive: {
+            0: { items: 2, nav: true },
+            600: { items: 3, nav: false },
+            1000: { items: 5, nav: true, loop: false, margin: 20 }
+            }
         })
     }
 })

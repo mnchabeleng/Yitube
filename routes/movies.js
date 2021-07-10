@@ -3,27 +3,35 @@ const router = express.Router()
 const axios = require('axios')
 const torrentStream = require('torrent-stream')
 const path = require('path')
+const createError = require('http-errors')
 
 router.get('/:id', async (req, res, next) => {
   const id = req.params.id
+  let movie = null
+  let relatedMpvies = null
   
   // Get movie by ID
-  let movie = await axios.get(`https://yts.mx/api/v2/movie_details.json?movie_id=${ id }&with_images=true&with_cast=true`)
-         .then(result => result.data)
-         .catch(err => null)
-  
-  // Get similar movies
-  let relatedMovies = await axios.get(`https://yts.mx/api/v2/movie_suggestions.json?movie_id=${ id }`)
-         .then(result => result.data)
-         .catch(err => null)
-  
-  movie = movie ? movie.data.movie : null
+  movie = await axios.get(`https://yts.mx/api/v2/movie_details.json?movie_id=${ id }&with_images=true&with_cast=true`)
+          .then(result => result.data)
+          .catch(err => null)
 
-  if(relatedMovies.data.movie_count > 0 && relatedMovies != null)
-    relatedMovies = relatedMovies.data.movies
+  if(!movie || movie.data.movie.title == null){
+    movie = null
+  }else{
+    movie = movie.data.movie
+
+    // Get related movies
+    relatedMovies = await axios.get(`https://yts.mx/api/v2/movie_suggestions.json?movie_id=${ id }`)
+                    .then(result => result.data)
+                    .catch(err => null)
+
+    if(relatedMovies.data.movie_count > 0 && relatedMovies != null)
+      relatedMovies = relatedMovies.data.movies
+
+  }
 
   const data = {
-    'title': movie ? movie.title : 'Movie',
+    'title': movie ? movie.title : 'Unable to retrieve movie',
     'movie': movie,
     'related_movies': relatedMovies
   }

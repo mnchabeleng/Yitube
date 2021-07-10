@@ -8,6 +8,8 @@ const concat = require('gulp-concat')
 const terser = require('gulp-terser')
 const imagemin = require('gulp-imagemin')
 const replace = require('gulp-replace')
+const strip = require('gulp-strip-comments')
+const sourcemaps = require('gulp-sourcemaps')
 sass.compiler = require('node-sass')
 
 // Export SASS to CSS
@@ -21,7 +23,9 @@ exports.sass = () => {
 // Minify CSS files
 exports.minCSS = () => {
     return gulp.src('./public/css/**/*.css')
+    .pipe(sourcemaps.init())
     .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('./public/css/'))
 }
 
@@ -32,6 +36,7 @@ exports.js = () => {
         './node_modules/@popperjs/core/dist/umd/popper.min.js',
         './node_modules/bootstrap/dist/js/bootstrap.min.js',
         './node_modules/awesomplete/awesomplete.min.js',
+        './resources/vendor/OwlCarousel/dist/owl.carousel.min.js',
         './resources/js/*.js'
     ])
     .pipe(babel({
@@ -47,6 +52,7 @@ exports.js = () => {
 // Minify JS files
 exports.minJS = () => {
     return gulp.src('./public/js/*.js')
+    .pipe(strip())
     .pipe(terser({}))
     .pipe(gulp.dest('./public/js/'))
 }
