@@ -1,0 +1,53 @@
+<%- include('./includes/header') -%>
+<section class="pt-5">
+    <div class="container">
+      <%- include('./includes/warning') -%>
+    </div>
+</section>
+<section class="pb-5">
+    <div class="container">
+        <% if(movie){ %>
+        <div class="row">
+            <div class="col-sm-8">
+                <h1 class="h4 mb-3"><%= movie.title_long %></h1>
+                <p class="text-justify"><%= movie.description_full %></p>
+                <%- //include('../includes/video_player', { 'id': movie.id }) %>
+                <h3 class="h5 mt-4">Related Movies</h3>
+                <%- include('./includes/list_movies') -%>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p>
+                            <a href="<%= movie.large_cover_image %>"><img class="img-thumbnail mx-auto d-block mb-2" id="movie_cover" src="/img/movie_cover.jpg" data-img="<%= movie.medium_cover_image %>" alt="<%= movie.title %>"></a>
+                        </p>
+                        <p>
+                            <b>Title:</b> <%= movie.title %><br>
+                            <b>Year:</b> <%= movie.year %><br>
+                            <b>Rating:</b> <%= movie.rating %>/10<br>
+                            <b>Time:</b> <%= movie.runtime %> mins<br>
+                            <b>Views/Downloads:</b> <%= movie.download_count %>
+                        </p>
+                        <p>
+                            <% movie.genres.forEach(genre => { %>
+                            <span class="badge badge-primary"><%= genre %></span>
+                            <% }) %>
+                        </p>
+                        <% if(typeof movie.cast != 'undefined'){ %>
+                        <% if(movie.cast.length > 0){ %>
+                        <h4 class="h5">Cast</h4>
+                        <p>    
+                            <% movie.cast.forEach(cast => { %>
+                            <a class="text-dark" href="https://www.imdb.com/name/nm<%= cast.imdb_code %>" target="_blank" rel="noopener noreferrer"><b><%= cast.name %></b></a><%= cast.character_name ? ' as ' + cast.character_name : null %><br>
+                            <% }) %>
+                        </p>
+                        <% } %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</section>
+<%- include('./includes/footer') -%>
