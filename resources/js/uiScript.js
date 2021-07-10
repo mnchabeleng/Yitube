@@ -52,7 +52,8 @@ window.addEventListener('load', (e) => {
         })
     }
 
-    const owlCarousel = document.querySelector('.owl-carousel')
+    // Movies carousel display
+    const owlCarousel = $('.owl-carousel')
     if( owlCarousel ){
         owlCarousel.owlCarousel({
             dots: false,
@@ -62,9 +63,9 @@ window.addEventListener('load', (e) => {
             lazyLoad: true,
             responsiveClass: true,
             responsive: {
-            0: { items: 2, nav: true },
-            600: { items: 3, nav: false },
-            1000: { items: 5, nav: true, loop: false, margin: 20 }
+            0: { items: 2, nav: true, loop: false },
+            600: { items: 4, nav: true, loop: false },
+            1000: { items: 6, nav: false, loop: false, margin: 30 }
             }
         })
     }

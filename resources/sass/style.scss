@@ -72,6 +72,19 @@ main {
     }
 }
 
+.owl-nav {
+    font-size: 4rem;
+    position: absolute;
+    top: -85px;
+    right: 0;
+    
+    button {
+        outline: 0;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
 footer {
     clip-path: polygon(2% 47%, 4% 0, 100% 52%, 100% 100%, 0 100%);
 }

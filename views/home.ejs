@@ -9,11 +9,11 @@
   <div class="container">
     <%- include('./includes/warning') -%>
     <h3 class="h4">Recently Added</h3>
-    <%- include('./includes/list_movies', {'movies': recently_added_movies}) -%>
+    <%- include('./includes/home_movies', {'movies': recently_added_movies}) -%>
     <h3 class="h4">Porpular</h3>
-    <%- include('./includes/list_movies', {'movies': popular_movies}) -%>
+    <%- include('./includes/home_movies', {'movies': popular_movies}) -%>
     <h3 class="h4">Top Rated</h3>
-    <%- include('./includes/list_movies', {'movies': top_rated_movies}) -%>
+    <%- include('./includes/home_movies', {'movies': top_rated_movies}) -%>
   </div>
 </section>
 <%- include('./includes/footer') -%>
