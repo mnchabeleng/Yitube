@@ -3,9 +3,9 @@ const router = express.Router()
 const axios = require('axios')
 
 router.get('/', async (req, res, next) => {
-  let recentlyAddeedMovies = []
-  let popularMovies = []
-  let topRatedMovies = []
+  let recentlyAddeedMovies = null
+  let popularMovies = null
+  let topRatedMovies = null
   
   // Get recently added movies
   recentlyAddeedMovies = await axios.get('https://yts.mx/api/v2/list_movies.json?limit=6&sort_by=date_added')
