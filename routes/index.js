@@ -8,17 +8,17 @@ router.get('/', async (req, res, next) => {
   let topRatedMovies = null
   
   // Get recently added movies
-  recentlyAddeedMovies = await axios.get('https://yts.mx/api/v2/list_movies.json?limit=6&sort_by=date_added')
+  recentlyAddeedMovies = await axios.get('https://yts.mx/api/v2/list_movies.json?limit=6&sort_by=date_added', { timeout: 3000 })
          .then(result => result.data.data.movies)
          .catch(e => null)
 
   // Get popular movies
-  popularMovies = await axios.get('https://yts.mx/api/v2/list_movies.json?limit=6&sort_by=download_count')
+  popularMovies = await axios.get('https://yts.mx/api/v2/list_movies.json?limit=6&sort_by=download_count', { timeout: 3000 })
          .then(result => result.data.data.movies)
          .catch(e => null)
 
   // Get top rated movies
-  topRatedMovies = await axios.get('https://yts.mx/api/v2/list_movies.json?limit=6&sort_by=rating')
+  topRatedMovies = await axios.get('https://yts.mx/api/v2/list_movies.json?limit=6&sort_by=rating', { timeout: 3000 })
          .then(result => result.data.data.movies)
          .catch(e => null)
 

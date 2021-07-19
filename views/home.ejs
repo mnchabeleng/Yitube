@@ -9,19 +9,25 @@
   <div class="container">
     <%- include('./includes/warning') -%>
 
+    <h3 class="h4">Recently Added</h3>
     <% if(recently_added_movies){ %>
-      <h3 class="h4">Recently Added</h3>
       <%- include('./includes/home_movies', {'movies': recently_added_movies}) -%>
+    <% }else{ %>
+      <p class="mb-5">Unable to load recently added movies.</p>
     <% } %>
 
+    <h3 class="h4">Popular</h3>
     <% if(popular_movies){ %>
-      <h3 class="h4">Popular</h3>
       <%- include('./includes/home_movies', {'movies': popular_movies}) -%>
+    <% }else{ %>
+      <p class="mb-5">Unable to load popular movies.</p>
     <% } %>
 
+    <h3 class="h4">Top Rated</h3>
     <% if(top_rated_movies){ %>
-      <h3 class="h4">Top Rated</h3>
       <%- include('./includes/home_movies', {'movies': top_rated_movies}) -%>
+    <% }else{ %>
+      <p class="mb-5">Unable to load top movies.</p>
     <% } %>
   </div>
 </section>

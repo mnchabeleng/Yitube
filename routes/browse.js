@@ -21,12 +21,12 @@ router.all('/', async (req, res, next) => {
 
   if(search == null){
     // Get movies without search keyword
-    movies = await axios.get(`https://yts.mx/api/v2/list_movies.json?page=${ page }&limit=${ limit }&sort_by=${ order }`)
+    movies = await axios.get(`https://yts.mx/api/v2/list_movies.json?page=${ page }&limit=${ limit }&sort_by=${ order }`, { timeout: 3000 })
            .then(result => result.data)
            .catch(e => null)
   }else{
     // Get movies with search keyword
-    movies = await axios.get(`https://yts.mx/api/v2/list_movies.json?page=${ page }&limit=${ limit }&query_term=${ encodeURIComponent(search) }&sort_by=${ order }`)
+    movies = await axios.get(`https://yts.mx/api/v2/list_movies.json?page=${ page }&limit=${ limit }&query_term=${ encodeURIComponent(search) }&sort_by=${ order }`, { timeout: 3000 })
            .then(result => result.data)
            .catch(e => null)
   }
