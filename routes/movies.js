@@ -41,6 +41,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.get('/:id/stream', async (req, res, next) => {
   const id = req.params.id
+  const quality = req.params.quality ? '720p' : '720p'
   let magnet = null
   
   // Get movie by ID
@@ -53,13 +54,13 @@ router.get('/:id/stream', async (req, res, next) => {
   // Create magnet link from movie torrent link
   if(movie){
     movie.torrents.forEach(torrent => {
-      if(torrent.quality == '720p')
+      if(torrent.quality == quality)
         magnet = `magnet:?xt=urn:btih:${ torrent.hash }&dn=${ encodeURIComponent(movie.title) }&tr=http://track.one:1234/announce&tr=udp://track.two:80`
     })
   }
 
   // Movie folder
-  const movieFolder = `${ movie.title.replace(/\s+/g, '-').toLowerCase() }.720p`
+  const movieFolder = `${ movie.title.replace(/\s+/g, '-').toLowerCase() }.${ quality }`
 
   // Download movie to server
   const engine = torrentStream(magnet, {
