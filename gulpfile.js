@@ -42,6 +42,7 @@ exports.js = () => {
     .pipe(babel({
         ignore: [
             './node_modules/',
+            './resources/vendor/'
         ],
         presets: ['@babel/env']
     }))
