@@ -15,7 +15,9 @@ window.addEventListener('load', (e) => {
     const movieCovers = document.querySelectorAll('#movie_cover')
     if(movieCovers){
         movieCovers.forEach(cover => {
-            cover.src = cover.dataset.img
+            if(!cover.onerror){
+                cover.src = cover.dataset.img
+            }
         })
     }
 

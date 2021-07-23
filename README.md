@@ -12,6 +12,7 @@ Stream movies in HD. A web application that convert torrent magnets into streama
 - Express
 - EJS
 - Gulpjs
+- Yify API
 
 ### Getting started
 
