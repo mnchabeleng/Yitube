@@ -31,11 +31,13 @@
                             <b>Time:</b> <%= movie.runtime %> mins<br>
                             <b>Views/Downloads:</b> <%= movie.download_count %>
                         </p>
+                        <% if(typeof movie.genres != 'undefined'){ %>
                         <p>
                             <% movie.genres.forEach(genre => { %>
                             <span class="badge badge-primary"><%= genre %></span>
                             <% }) %>
                         </p>
+                        <% } %>
                         <% if(typeof movie.cast != 'undefined'){ %>
                         <% if(movie.cast.length > 0){ %>
                         <h4 class="h5">Cast</h4>
