@@ -14,7 +14,7 @@ Stream movies in HD. A web application that convert torrent magnets into streama
 - Gulpjs
 - Yify API
 
-### Getting started
+### To Run
 
 1. Clone project
 2. $ npm install

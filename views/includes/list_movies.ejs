@@ -3,7 +3,12 @@
       <% movies.forEach(movie => { %>
       <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
         <a href="/movies/<%= movie.id %>">
-          <img class="img-thumbnail mx-auto d-block mb-2" id="movie_cover" src="/img/movie_cover.jpg" data-img="<%= movie.medium_cover_image %>" alt="<%= movie.title %>">
+          <img 
+              class="img-thumbnail mx-auto d-block mb-2"
+              id="movie_cover" src="/img/movie_cover.jpg"
+              data-img="<%= movie.medium_cover_image %>"
+              loading="lazy"
+              alt="<%= movie.title %>">
         </a>
         <p>
           <a class="text-dark" href="/movies/<%= movie.id %>"><b><%= movie.title %></b></a><br>
@@ -12,15 +17,22 @@
       </div>
       <% }) %>
     </div>
-<% }else if(typeof movies != 'undefined'){ %>
+<% } else if(typeof movies != 'undefined') { %>
   <%- include('./no_results') -%>
 <% } %>
+
 <% if(typeof related_movies != 'undefined' && related_movies.length > 0){ %>
     <div class="row pt-3 pb-3">
       <% related_movies.forEach(movie => { %>
       <div class="col-6 col-sm-4 col-md-3 mb-3">
         <a href="/movies/<%= movie.id %>">
-          <img class="img-thumbnail mx-auto d-block mb-2" id="movie_cover" src="/img/movie_cover.jpg" data-img="<%= movie.medium_cover_image %>" alt="<%= movie.title %>">
+          <img
+              class="img-thumbnail mx-auto d-block mb-2"
+              id="movie_cover"
+              src="/img/movie_cover.jpg"
+              data-img="<%= movie.medium_cover_image %>"
+              loading="lazy"
+              alt="<%= movie.title %>">
         </a>
         <p>
           <a class="text-dark" href="/movies/<%= movie.id %>"><b><%= movie.title %></b></a><br>

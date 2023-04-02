@@ -3,7 +3,12 @@
         <% movies.forEach(movie => {%>
             <div class="item">
                 <a href="/movies/<%= movie.id %>">
-                    <img class="img-thumbnail mx-auto d-block mb-2" id="movie_cover" src="/img/movie_cover.jpg" data-img="<%= movie.medium_cover_image %>" alt="<%= movie.title %>">
+                    <img
+                        class="img-thumbnail mx-auto d-block mb-2"
+                        id="movie_cover"
+                        src="/img/movie_cover.jpg"
+                        loading="lazy"
+                        data-img="<%= movie.medium_cover_image %>" alt="<%= movie.title %>">
                 </a>
                 <p>
                     <a class="text-dark" href="/movies/<%= movie.id %>"><b><%= movie.title %></b></a><br>

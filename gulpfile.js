@@ -1,6 +1,6 @@
 'use strict'
 const gulp = require('gulp')
-const sass = require('gulp-sass')
+const sass = require('gulp-sass')(require('sass'))
 const beautify = require('gulp-beautify')
 const cleanCSS = require('gulp-clean-css')
 const babel = require('gulp-babel')
