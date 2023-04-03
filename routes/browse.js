@@ -1,17 +1,19 @@
+'use strict'
 const express = require('express')
 const router = express.Router()
 const axios = require('axios')
 const paginate = require('express-paginate')
 
 // Express pagination middleware
-router.use(paginate.middleware(18, 50))
+const limitPerPage = 36
+router.use(paginate.middleware(limitPerPage, 50))
 
 router.all('/', async (req, res, next) => {
   let search = req.query.search ? req.query.search : null
   let order = req.query.order ? req.query.order : null
 
   let page = req.query.page ? req.query.page : 1
-  const limit = 18
+  const limit = limitPerPage
   let pageCount = 0;
 
   search = req.body.search ? req.body.search : search
