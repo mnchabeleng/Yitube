@@ -11,12 +11,12 @@ router.get('/login', (req, res, next) => {
 })
 
 router.post('/login', (req, res, next) => {
-    const {
-        email,
-        password
-    } = req.body
+    const {email, password} = req.body
 
-    console.log('login')
+    passport.authenticate('local', (err, user, info) => {
+
+    })(req, res, next)
+
     res.sendStatus(200)
 })
 
@@ -29,6 +29,10 @@ router.get('/signup', (req, res, next) => {
 
 router.post('/signup', (req, res, next) => {
     console.log('signup')
+    res.sendStatus(200)
+})
+
+router.get('/logout', (req, res, next) => {
     res.sendStatus(200)
 })
 

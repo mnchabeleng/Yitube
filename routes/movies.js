@@ -9,7 +9,7 @@ const createError = require('http-errors')
 router.get('/:id', async (req, res, next) => {
   const id = req.params.id
   let movie = null
-  let relatedMpvies = null
+  let relatedMovies = null
   
   // Get movie by ID
   movie = await axios.get(`https://yts.mx/api/v2/movie_details.json?movie_id=${ id }&with_images=true&with_cast=true`)
