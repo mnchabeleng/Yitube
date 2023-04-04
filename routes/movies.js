@@ -67,7 +67,7 @@ router.get('/:id/stream', async (req, res, next) => {
   const engine = torrentStream(magnet, {
     connections: 100,
     uploads: 10,
-    path: `./movies/${ movieFolder }`,
+    path: path.join(__dirname, `movies/${ movieFolder }`),
     verify: true,
     dht: true,
     tracker: true,
