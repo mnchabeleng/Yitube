@@ -1,7 +1,8 @@
-exports.auth = (req, res, next) => {
-    next()
-}
+'use strict'
 
 exports.guest = (req, res, next) => {
-    next()
+    if(req.session.user) {
+        return res.redirect('/')
+    }
+    return next()
 }

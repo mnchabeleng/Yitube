@@ -9,12 +9,24 @@
     <div class="container">
         <% if(movie){ %>
         <div class="row">
+            <% if (user) { %>
             <div class="col-sm-12">
                 <%- include('./includes/video_player', { 'id': movie.id }) %>
             </div>
+            <% } %>
             <div class="col-sm-8">
                 <h1 class="h4 mb-3"><%= movie.title_long %></h1>
                 <p class="text-justify"><%= movie.description_full %></p>
+                <ul class="movie-cta">
+                    <% if(!user) { %>
+                    <li><a href="/login">Login to start streaming</a></li>
+                    <% } %>
+                    
+                    <% if(movie.yt_trailer_code) { %>
+                    &bull;
+                    <li><a target='_blank' rel="noopener noreferrer" href="https://www.youtube.com/watch?v=<%= movie.yt_trailer_code %>">Watch trailer</a></li>
+                    <% } %>
+                </ul>
                 <h3 class="h5 mt-4">Related Movies</h3>
                 <%- include('./includes/list_movies') -%>
             </div>

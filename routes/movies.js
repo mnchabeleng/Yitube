@@ -32,6 +32,7 @@ router.get('/:id', async (req, res, next) => {
   }
 
   const data = {
+    'user': req.session.user ? req.session.user : null,
     'title': movie ? movie.title : 'Unable to retrieve movie',
     'movie': movie,
     'related_movies': relatedMovies

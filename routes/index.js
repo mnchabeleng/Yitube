@@ -1,4 +1,5 @@
 'use strict'
+
 const express = require('express')
 const router = express.Router()
 const axios = require('axios')
@@ -24,10 +25,11 @@ router.get('/', async (req, res, next) => {
          .catch(e => null)
 
   const data = {
-    'title': 'Yitube',
-    'recently_added_movies': recentlyAddeedMovies,
-    'popular_movies': popularMovies,
-    'top_rated_movies': topRatedMovies
+       'user': req.session.user ? req.session.user : null,
+       'title': 'Yitube',
+       'recently_added_movies': recentlyAddeedMovies,
+       'popular_movies': popularMovies,
+       'top_rated_movies': topRatedMovies
   }
 
   res.render('home', data)

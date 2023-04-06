@@ -9,8 +9,7 @@ const app = express()
 app.use(session({
   secret: 'b121c24de8a5a4b7dcda63a0afa56d2d72fa7c8b83adbd6bcbe72858552621ac',
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
+  saveUninitialized: true
 }))
 
 // view engine setup

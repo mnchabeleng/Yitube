@@ -41,6 +41,7 @@ router.all('/', async (req, res, next) => {
     movies = movies.data.movies
 
   const data = {
+    'user': req.session.user ? req.session.user : null,
     'title': 'Browse',
     'page': page,
     'search': search,

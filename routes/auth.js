@@ -1,39 +1,67 @@
 'use strict'
+
 const express = require('express')
 const router = express.Router()
-const passport = require('passport')
+const { guest } = require('../middleware/auth')
+const app = require('../app')
 
-router.get('/login', (req, res, next) => {
+const user = {
+    id: 1,
+    name: 'john doe',
+    email: 'john.doe@mail.com'
+}
+
+router.get('/login', guest, (req, res) => {
+    req.session.previousURL = req.header('Referer') || '/'
     const data = {
+        'user': req.session.user ? req.session.user : null,
         'title': 'Login'
     }
-    res.render('pages/auth/login', data)
+    res.render('auth/login', data)
 })
 
-router.post('/login', (req, res, next) => {
+router.post('/login', guest, (req, res) => {
     const {email, password} = req.body
-
-    passport.authenticate('local', (err, user, info) => {
-
-    })(req, res, next)
-
-    res.sendStatus(200)
+    const previousURL = req.header('Referer') || '/login'
+    req.session.user = user
+    
+    req.session.save(function (err) {
+        if (err) return next(err)
+        res.redirect(req.session.previousURL)
+    })
 })
 
-router.get('/signup', (req, res, next) => {
+router.get('/signup', guest, (req, res) => {
     const data = {
+        'user': req.session.user ? req.session.user : null,
         'title': 'Signup'
     }
-    res.render('pages/auth/signup', data)
+    res.render('auth/signup', data)
 })
 
-router.post('/signup', (req, res, next) => {
-    console.log('signup')
-    res.sendStatus(200)
+router.post('/signup', guest, (req, res) => {
+    const previousURL = req.header('Referer') || '/signup'
+    console.log(previousURL)
+    res.redirect(previousURL)
 })
 
-router.get('/logout', (req, res, next) => {
-    res.sendStatus(200)
+router.get('/logout', (req, res) => {
+    req.session.user = null
+    const previousURL = req.header('Referer') || '/login'
+    
+    req.session.save(function (err) {
+        if (err) {
+            next(err)
+        }
+
+        req.session.regenerate(function (err) {
+          if (err) {
+            next(err)
+          }
+
+          res.redirect(previousURL)
+        })
+    })
 })
 
 module.exports = router
