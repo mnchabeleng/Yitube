@@ -2,7 +2,8 @@
 
 exports.guest = (req, res, next) => {
     if(req.session.user) {
-        return res.redirect('/')
+        const previousURL = req.session.previousURL || '/'
+        return res.redirect(previousURL)
     }
     return next()
 }

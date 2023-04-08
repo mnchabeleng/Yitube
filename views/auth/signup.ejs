@@ -4,19 +4,22 @@
         <h1 class="h2"><%= title %></h1>
         <form method="POST" id="login-form" class="row">
             <div class="col-md-8 col-lg-6">
+                <div class="alert alert-warning fade show" role="alert">
+                    Signup has been disabled
+                </div>
                 <div class="form-group">
                     <label for="email">Email address:</label>
-                    <input type="email" class="form-control" name="search" id="search" placeholder="Email address" />
+                    <input type="email" class="form-control" name="search" id="search" placeholder="Email address" disabled />
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" />
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" disabled />
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
                     <label for="password">Confirm password:</label>
-                    <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm password" />
+                    <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm password" disabled />
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">

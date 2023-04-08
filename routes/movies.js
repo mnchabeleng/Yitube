@@ -42,79 +42,86 @@ router.get('/:id', async (req, res, next) => {
 })
 
 router.get('/:id/stream', async (req, res, next) => {
-  const id = req.params.id
-  const quality = req.params.quality ? '720p' : '720p'
-  let magnet = null
+  if(!req.session.user) {
+    const data = {
+      'title': 403
+    }
+    res.render('403', data)
+  } else {
+    const id = req.params.id
+    const quality = req.params.quality ? '720p' : '720p'
+    let magnet = null
+    
+    // Get movie by ID
+    let movie = await axios.get(`https://yts.mx/api/v2/movie_details.json?movie_id=${ id }`)
+           .then(result => result.data)
+           .catch(err => null)
   
-  // Get movie by ID
-  let movie = await axios.get(`https://yts.mx/api/v2/movie_details.json?movie_id=${ id }`)
-         .then(result => result.data)
-         .catch(err => null)
-
-  movie = movie ? movie.data.movie : null
+    movie = movie ? movie.data.movie : null
+    
+    // Create magnet link from movie torrent link
+    if(movie){
+      movie.torrents.forEach(torrent => {
+        if(torrent.quality == quality)
+          magnet = `magnet:?xt=urn:btih:${ torrent.hash }&dn=${ encodeURIComponent(movie.title) }&tr=http://track.one:1234/announce&tr=udp://track.two:80`
+      })
+    }
   
-  // Create magnet link from movie torrent link
-  if(movie){
-    movie.torrents.forEach(torrent => {
-      if(torrent.quality == quality)
-        magnet = `magnet:?xt=urn:btih:${ torrent.hash }&dn=${ encodeURIComponent(movie.title) }&tr=http://track.one:1234/announce&tr=udp://track.two:80`
+    // Movie folder
+    const movieFolder = `${ movie.title.replace(/\s+/g, '-').toLowerCase() }.${ quality }`
+  
+    // Download movie to server
+    const engine = torrentStream(magnet, {
+      connections: 100,
+      uploads: 10,
+      path: `./movies/${ movieFolder }`,
+      verify: true,
+      dht: true,
+      tracker: true,
+      trackers: [
+        'udp://tracker.openbittorrent.com:80',
+        'udp://tracker.ccc.de:80'
+      ],
+    })
+  
+    // Create streamable link
+    engine.on('ready', () => {
+      
+      engine.files = engine.files.sort(function (a, b) {
+        return b.length - a.length
+      }).slice(0, 1)
+      
+      const file = engine.files[0]
+      const fileSize = file.length
+      const ext = path.extname(file.name)
+  
+      const range = req.headers.range
+      if (range) {
+        const parts = range.replace(/bytes=/, "").split("-")
+        const start = parseInt(parts[0], 10)
+        const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1
+        const chunksize = (end - start) + 1
+        const stream = file.createReadStream({start, end})
+        const head = {
+          'Content-Range': `bytes ${start} - ${end} / ${fileSize}`,
+          'Accept-Ranges': 'bytes',
+          'Content-Length': chunksize,
+          'Content-Type': `video/${ (ext === '.webm' || ext === '.mp4') ? ext : 'webm' }`,
+        }
+        res.writeHead(206, head)
+        stream.pipe(res)
+      } else {
+        const stream = file.createReadStream()
+        const head = {
+          'Content-Length': fileSize,
+          'Content-Type': `video/${ (ext === '.webm' || ext === '.mp4') ? ext : 'webm' }`,
+        }
+        res.writeHead(200, head)
+        stream.pipe(res)
+      }
     })
   }
-
-  // Movie folder
-  const movieFolder = `${ movie.title.replace(/\s+/g, '-').toLowerCase() }.${ quality }`
-
-  // Download movie to server
-  const engine = torrentStream(magnet, {
-    connections: 100,
-    uploads: 10,
-    path: path.join(__dirname, `movies/${ movieFolder }`),
-    verify: true,
-    dht: true,
-    tracker: true,
-    trackers: [
-      'udp://tracker.openbittorrent.com:80',
-      'udp://tracker.ccc.de:80'
-    ],
-  })
-
-  // Create streamable link
-  engine.on('ready', () => {
-    
-    engine.files = engine.files.sort(function (a, b) {
-      return b.length - a.length
-    }).slice(0, 1)
-    
-    const file = engine.files[0]
-    const fileSize = file.length
-    const ext = path.extname(file.name)
-
-    const range = req.headers.range
-    if (range) {
-      const parts = range.replace(/bytes=/, "").split("-")
-      const start = parseInt(parts[0], 10)
-      const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1
-      const chunksize = (end - start) + 1
-      const stream = file.createReadStream({start, end})
-      const head = {
-        'Content-Range': `bytes ${start} - ${end} / ${fileSize}`,
-        'Accept-Ranges': 'bytes',
-        'Content-Length': chunksize,
-        'Content-Type': `video/${ (ext === '.webm' || ext === '.mp4') ? ext : 'webm' }`,
-      }
-      res.writeHead(206, head)
-      stream.pipe(res)
-    } else {
-      const stream = file.createReadStream()
-      const head = {
-        'Content-Length': fileSize,
-        'Content-Type': `video/${ (ext === '.webm' || ext === '.mp4') ? ext : 'webm' }`,
-      }
-      res.writeHead(200, head)
-      stream.pipe(res)
-    }
-
-  })
+  
 })
 
 module.exports = router
