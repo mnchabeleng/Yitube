@@ -3,7 +3,6 @@
 const express = require('express')
 const router = express.Router()
 const { guest } = require('../middleware/auth')
-require('dotenv').config()
 
 router.get('/login', guest, (req, res) => {
     const fullURL = req.protocol + '://' + req.get('host') + req.originalUrl
@@ -25,8 +24,8 @@ router.post('/login', guest, (req, res) => {
     const previousURL = req.header('Referer') || '/login'
     
     // At this point your welcome to use any auth provider
-    if(email == process.env.USERNAME && password == process.env.PASSWORD) {
-        req.session.user = { username: process.env.USERNAME }
+    if(email == process.env.EMAIL && password == process.env.PASSWORD) {
+        req.session.user = { username: process.env.EMAIL }
         req.session.save(function (err) {
             if (err) return next(err)
             res.redirect(req.session.previousURL)

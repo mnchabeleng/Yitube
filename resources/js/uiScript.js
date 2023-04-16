@@ -2,7 +2,7 @@
  * Handle common UI components
  */
 
-const API_URL = 'http://localhost:3000/api'
+const API_URL = 'https://yts.mx/api/v2/list_movies.json'
 
 window.addEventListener('load', (e) => {
     // Video player load
@@ -43,11 +43,13 @@ window.addEventListener('load', (e) => {
         })
 
         searchInput.addEventListener('input', () => {
-            fetch(`${ API_URL }/movies?search=${ searchInput.value }`)
+            fetch(`${ API_URL }?limit=${ 5 }&query_term=${ searchInput.value }`)
             .then(res => res.json())
             .then(data => {
-                if(data.length > 0){
-                    const movieTitles = data.map(movie => movie.title)
+                const movies = data?.data?.movies
+
+                if(movies != undefined && movies.length > 0){
+                    const movieTitles = movies.map(movie => movie.title)
                     awesomplete.list = movieTitles
                 }
             })

@@ -32,7 +32,7 @@ animateIn:!1},e.prototype.swap=function(){if(1===this.core.settings.items&&a.sup
  * Handle common UI components
  */
 
-var API_URL = 'http://localhost:3000/api';
+var API_URL = 'https://yts.mx/api/v2/list_movies.json';
 window.addEventListener('load', function (e) {
   // Video player load
   var videoPlayerOverlay = document.querySelector('#video-player .overlay');
@@ -71,11 +71,13 @@ window.addEventListener('load', function (e) {
       maxItems: 5
     });
     searchInput.addEventListener('input', function () {
-      fetch("".concat(API_URL, "/movies?search=").concat(searchInput.value)).then(function (res) {
+      fetch("".concat(API_URL, "?limit=", 5, "&query_term=").concat(searchInput.value)).then(function (res) {
         return res.json();
       }).then(function (data) {
-        if (data.length > 0) {
-          var movieTitles = data.map(function (movie) {
+        var _data$data;
+        var movies = data === null || data === void 0 ? void 0 : (_data$data = data.data) === null || _data$data === void 0 ? void 0 : _data$data.movies;
+        if (movies != undefined && movies.length > 0) {
+          var movieTitles = movies.map(function (movie) {
             return movie.title;
           });
           awesomplete.list = movieTitles;

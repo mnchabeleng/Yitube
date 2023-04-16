@@ -3,6 +3,7 @@ const express = require('express')
 const path = require('path')
 const logger = require('morgan')
 const session = require('express-session')
+require('dotenv').config({ path: path.join(__dirname, './.env') })
 
 const app = express()
 
@@ -28,9 +29,6 @@ app.use('/movies', require('./routes/movies'))
 
 // auth routes
 app.use('/', require('./routes/auth'))
-
-// api routes
-app.use('/api/movies', require('./routes/api/movies'))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
