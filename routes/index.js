@@ -32,7 +32,7 @@ router.get('/', async (req, res, next) => {
        'top_rated_movies': topRatedMovies
   }
 
-  res.render('home', data)
+  res.render('pages/index', data)
 })
 
 module.exports = router

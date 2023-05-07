@@ -12,6 +12,7 @@ window.addEventListener('load', (e) => {
     }
 
     // Load movie poster
+    /*
     const movieCovers = document.querySelectorAll('#movie_cover')
     if(movieCovers){
         movieCovers.forEach(cover => {
@@ -20,6 +21,7 @@ window.addEventListener('load', (e) => {
             }
         })
     }
+    */
 
     // Prevent submiting empty search form
     const searchForm = document.querySelectorAll('#search-form')

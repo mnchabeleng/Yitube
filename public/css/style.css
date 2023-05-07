@@ -11550,6 +11550,10 @@ main {
     min-height: 88vh;
 }
 
+.navbar-dark .navbar-toggler {
+    border: none;
+}
+
 .warning {
     border: 2px solid red;
 }

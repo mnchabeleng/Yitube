@@ -41,14 +41,16 @@ window.addEventListener('load', function (e) {
   }
 
   // Load movie poster
-  var movieCovers = document.querySelectorAll('#movie_cover');
-  if (movieCovers) {
-    movieCovers.forEach(function (cover) {
-      if (!cover.onerror) {
-        cover.src = cover.dataset.img;
-      }
-    });
+  /*
+  const movieCovers = document.querySelectorAll('#movie_cover')
+  if(movieCovers){
+      movieCovers.forEach(cover => {
+          if(!cover.onerror){
+              cover.src = cover.dataset.img
+          }
+      })
   }
+  */
 
   // Prevent submiting empty search form
   var searchForm = document.querySelectorAll('#search-form');

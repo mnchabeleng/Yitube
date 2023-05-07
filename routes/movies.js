@@ -46,7 +46,7 @@ router.get('/:id/stream', async (req, res, next) => {
     const data = {
       'title': 403
     }
-    res.render('403', data)
+    res.render('pages/error/403', data)
   } else {
     const id = req.params.id
     const quality = req.params.quality ? '720p' : '720p'

@@ -53,7 +53,7 @@ router.all('/', async (req, res, next) => {
     'pageCount': pageCount
   }
 
-  res.render('browse', data)
+  res.render('pages/movies/browse', data)
 })
 
 module.exports = router

@@ -46,12 +46,12 @@ app.use(function(err, req, res, next) {
     const data = {
       'title': 404
     }
-    res.render('404', data)
+    res.render('pages/error/404', data)
   }
 
   // render the error page
   res.status(err.status || 500)
-  res.render('error')
+  res.render('pages/error/index')
 })
 
 module.exports = app
