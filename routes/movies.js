@@ -38,7 +38,7 @@ router.get('/:id', async (req, res, next) => {
     'related_movies': relatedMovies
   }
 
-  res.render('movie', data)
+  res.render('pages/movies/single', data)
 })
 
 router.get('/:id/stream', async (req, res, next) => {
